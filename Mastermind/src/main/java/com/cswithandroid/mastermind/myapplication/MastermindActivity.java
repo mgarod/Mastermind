@@ -101,8 +101,8 @@ public class MastermindActivity extends AppCompatActivity {
      ***/
     private MastermindDictionary dictionary;
     public static int currentDifficulty;
-    public static int visibleWords = 10;
     public static String answer;
+    public int numTries;
 
     private Button easyButton;
     private Button medButton;

@@ -42,25 +42,13 @@ public class MastermindDictionary {
     }
 
     /*** Start New Game ***/
-    public ArrayList<String> startNewGame(){
+    public void startNewGame(){
         ArrayList<String> masterList = sizeToWords.get(MastermindActivity.currentDifficulty);
 
         int r = random.nextInt(masterList.size());
         String s = masterList.get(r);
-        ArrayList<String> list = new ArrayList<>();
-        list.add(s);
-
-        for(int i = MastermindActivity.visibleWords; i > 0; i--){
-            do{
-                r = random.nextInt(masterList.size());
-            } while( list.contains(masterList.get(r)) );
-
-            list.add(masterList.get(r));
-        }
 
         MastermindActivity.setAnswer(s);
-        list.add(random.nextInt(list.size()), s);
 
-        return list;
     }
 }
