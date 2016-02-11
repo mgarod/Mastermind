@@ -1,0 +1,67 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#5ea8c0"
+    tools:context="com.cswithandroid.mastermind.myapplication.MastermindActivity">
+
+    <!-- The primary full-screen view. This can be replaced with whatever view
+         is needed to present your content, e.g. VideoView, SurfaceView,
+         TextureView, etc. -->
+
+    <!-- This FrameLayout insets its children based on system windows using
+         android:fitsSystemWindows. -->
+
+    <LinearLayout
+        style="?metaButtonBarStyle"
+        tools:ignore="UselessParent"
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|center_horizontal"
+        android:background="@color/black_overlay"
+        android:orientation="horizontal" >
+
+        <Button
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Easy (4)"
+            android:id="@+id/button"
+            android:layout_weight="1" />
+
+        <Button
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Medium (6)"
+            android:id="@+id/button2"
+            android:layout_weight="1" />
+
+        <Button
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Hard (8)"
+            android:id="@+id/button3"
+            android:layout_weight="1" />
+    </LinearLayout>
+
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="280dp"
+        android:id="@+id/listView"
+        android:layout_gravity="center"
+        android:background="#a9a7a7"
+        android:fastScrollAlwaysVisible="false" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="111dp"
+        android:id="@+id/editText"
+        android:layout_gravity="left|top"
+        android:hint="@string/edit_text_prompt"
+        android:background="#6fedcb"
+        android:inputType="text" />
+
+</FrameLayout>
