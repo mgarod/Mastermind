@@ -104,7 +104,7 @@ public class MastermindActivity extends AppCompatActivity {
      ***/
     private MastermindDictionary dictionary;
     public static ArrayList<String> attempts;
-    public static int currentDifficulty;
+    public static int currentDifficulty = 4;
     public static int visibleWords = 10;
     public static String answer;
     public static int tries;
@@ -128,6 +128,12 @@ public class MastermindActivity extends AppCompatActivity {
         //mControlsView = findViewById(R.id.fullscreen_content_controls);
         //mContentView = findViewById(R.id.fullscreen_content);
 
+        easyButton = (Button) findViewById(R.id.easyButton);
+        medButton = (Button) findViewById(R.id.medButton);
+        hardButton = (Button) findViewById(R.id.hardButton);
+        submitButton = (Button) findViewById(R.id.submitButton);
+        setEasy(this.mContentView);
+
         AssetManager assetManager = getAssets();
         try {
             InputStream inputStream = assetManager.open("words.txt");
@@ -137,11 +143,7 @@ public class MastermindActivity extends AppCompatActivity {
             toast.show();
         }
 
-        easyButton = (Button) findViewById(R.id.easyButton);
-        medButton = (Button) findViewById(R.id.medButton);
-        hardButton = (Button) findViewById(R.id.hardButton);
-
-        submitButton = (Button) findViewById(R.id.submitButton);
+        startNewGame(this.mContentView);
 
         /*
         // Set up the user interaction to manually show or hide the system UI.
@@ -241,27 +243,35 @@ public class MastermindActivity extends AppCompatActivity {
         hardButton.setBackgroundColor(Color.WHITE);
     }
 
-    public void submitButton(){
+    public void submitWord(View view){
+        System.out.println("The answer: "+answer);
         EditText input = (EditText) findViewById(R.id.userInput);
-        String userInput = input.toString();
-        int hits = numRight(userInput);
+        String userInput = input.getText().toString();
+        System.out.println("\n\nuserinput: "+userInput+"\n\n");
+        if(userInput.length() == currentDifficulty) {
 
-        if(hits == currentDifficulty) {
-            Toast toast = Toast.makeText(this, "Congrats! You win", Toast.LENGTH_LONG);
-            toast.show();
-            submitButton.setEnabled(false);
+            int hits = numRight(userInput);
+
+            System.out.println("\n\ninside submitword\n\n");
+
+            if (hits == currentDifficulty) {
+                Toast toast = Toast.makeText(this, "Congrats! You win", Toast.LENGTH_LONG);
+                toast.show();
+                submitButton.setEnabled(false);
+            } else {
+                //attempts.add(userInput + ": " + Integer.toString(hits) + " / " + Integer.toString(currentDifficulty));
+                String s = userInput + ": " + Integer.toString(hits) + " / " + Integer.toString(currentDifficulty);
+                TextView score = (TextView) findViewById(R.id.scoreBoard);
+                score.setText(Integer.toString(++tries));
+                
+                TextView wordsView = (TextView) findViewById(R.id.visibleWords);
+                s = s+"/n"+wordsView.getText().toString();
+                wordsView.setText(s);
+
+            }
         }
-        else{
-            attempts.add(userInput + ": " + Integer.toString(hits));
-            TextView score = (TextView) findViewById(R.id.scoreBoard);
-            score.setText(Integer.toString(++tries));
 
-            ListView listV = (ListView) findViewById(R.id.visibleWords);
-            
-
-        }
-
-        input.clearComposingText();
+        input.setText("");
     }
 
     public int numRight(String input){
@@ -275,5 +285,9 @@ public class MastermindActivity extends AppCompatActivity {
 
     public static Button getSubmitButton(){
         return submitButton;
+    }
+
+    public void startNewGame(View view){
+        dictionary.startNewGame();
     }
 }

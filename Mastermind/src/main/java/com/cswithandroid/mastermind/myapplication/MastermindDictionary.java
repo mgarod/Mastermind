@@ -31,16 +31,16 @@ public class MastermindDictionary {
 
             // Add words to HashMap according to word length
             if(sizeToWords.containsKey( word.length()) ){
-                if(sizeToWords.containsKey( word.length()) ){
-                    sizeToWords.get(word.length()).add(word);
-                }
-                else{
-                    ArrayList<String> list = new ArrayList<>();
-                    list.add(word);
-                    sizeToWords.put(word.length(),list);
-                }
+                sizeToWords.get(word.length()).add(word);
+            }
+            else{
+                ArrayList<String> list = new ArrayList<>();
+                list.add(word);
+                sizeToWords.put(word.length(),list);
             }
         }
+
+        System.out.println(sizeToWords.get(8));
     }
 
     /*** Start New Game ***/
@@ -48,7 +48,10 @@ public class MastermindDictionary {
         ArrayList<String> masterList = sizeToWords.get(MastermindActivity.currentDifficulty);
 
         int r = random.nextInt(masterList.size());
+        System.out.println("\n\nML Size: "+masterList.size()+"\n\n");
+        System.out.println("\n\nR: "+r+"\n\n");
         String s = masterList.get(r);
+        System.out.println("\n\nS: "+s+"\n\n");
 
         MastermindActivity.setAnswer(s);
         MastermindActivity.attempts = new ArrayList<String>();

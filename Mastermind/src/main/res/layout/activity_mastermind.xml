@@ -80,15 +80,6 @@
 
     </LinearLayout>
 
-    <ListView
-        android:layout_width="match_parent"
-        android:layout_height="280dp"
-        android:id="@+id/visibleWords"
-        android:layout_gravity="center"
-        android:background="#a9a7a7"
-        android:fastScrollAlwaysVisible="false"
-        android:choiceMode="none" />
-
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
@@ -125,8 +116,16 @@
                 android:text="Submit"
                 android:id="@+id/submitButton"
                 android:layout_gravity="right|top"
-                android:layout_weight="1" />
+                android:layout_weight="1"
+                android:onClick="submitWord" />
         </LinearLayout>
     </LinearLayout>
+
+    <TextView
+        android:layout_width="321dp"
+        android:layout_height="263dp"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:id="@+id/visibleWords"
+        android:layout_gravity="center" />
 
 </FrameLayout>
