@@ -17,37 +17,67 @@
         tools:ignore="UselessParent"
         android:id="@+id/buttonBar"
         android:layout_width="match_parent"
-        android:layout_height="34dp"
+        android:layout_height="114dp"
         android:layout_gravity="bottom|center_horizontal"
         android:background="@color/black_overlay"
-        android:orientation="horizontal" >
+        android:orientation="vertical" >
 
-        <Button
-            style="?android:attr/buttonStyleSmall"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="Easy (4)"
-            android:id="@+id/easyButton"
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="fill_parent"
             android:layout_weight="1"
-            android:onClick="setEasy" />
+            android:id="@+id/buttonLayout">
 
-        <Button
-            style="?android:attr/buttonStyleSmall"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="Medium (6)"
-            android:id="@+id/medButton"
-            android:layout_weight="1"
-            android:onClick="setMedium" />
+            <Button
+                style="?android:attr/buttonStyleSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:text="Easy (4)"
+                android:id="@+id/easyButton"
+                android:layout_weight="1"
+                android:onClick="setEasy" />
 
-        <Button
-            style="?android:attr/buttonStyleSmall"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="Hard (8)"
-            android:id="@+id/hardButton"
-            android:layout_weight="1"
-            android:onClick="setHard" />
+            <Button
+                style="?android:attr/buttonStyleSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:text="Medium (6)"
+                android:id="@+id/medButton"
+                android:layout_weight="1"
+                android:onClick="setMedium" />
+
+            <Button
+                style="?android:attr/buttonStyleSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:text="Hard (8)"
+                android:id="@+id/hardButton"
+                android:layout_weight="1"
+                android:onClick="setHard" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="61dp">
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:text="New Button"
+                android:id="@+id/button"
+                android:layout_weight="1" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:text="Start New Game"
+                android:id="@+id/newGameButton"
+                android:layout_weight="1"
+                android:onClick="startNewGame" />
+        </LinearLayout>
+
     </LinearLayout>
 
     <ListView
@@ -59,13 +89,44 @@
         android:fastScrollAlwaysVisible="false"
         android:choiceMode="none" />
 
-    <EditText
+    <LinearLayout
+        android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="111dp"
-        android:id="@+id/userInput"
-        android:layout_gravity="left|top"
-        android:hint="@string/edit_text_prompt"
-        android:background="#6fedcb"
-        android:inputType="text" />
+        android:layout_height="117dp"
+        android:id="@+id/userDashboard">
+
+        <EditText
+            android:layout_width="279dp"
+            android:layout_height="111dp"
+            android:id="@+id/userInput"
+            android:layout_gravity="left|top"
+            android:hint="@string/edit_text_prompt"
+            android:background="#6fedcb"
+            android:inputType="text" />
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/submitLayout">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:id="@+id/scoreBoard"
+                android:layout_weight="1"
+                android:text="ScoreBoard"
+                android:password="false" />
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Submit"
+                android:id="@+id/submitButton"
+                android:layout_gravity="right|top"
+                android:layout_weight="1" />
+        </LinearLayout>
+    </LinearLayout>
 
 </FrameLayout>

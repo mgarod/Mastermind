@@ -12,6 +12,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -254,6 +255,9 @@ public class MastermindActivity extends AppCompatActivity {
             attempts.add(userInput + ": " + Integer.toString(hits));
             TextView score = (TextView) findViewById(R.id.scoreBoard);
             score.setText(Integer.toString(++tries));
+
+            ListView listV = (ListView) findViewById(R.id.visibleWords);
+            
 
         }
 
