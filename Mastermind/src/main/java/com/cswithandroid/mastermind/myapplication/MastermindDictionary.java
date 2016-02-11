@@ -4,6 +4,8 @@ package com.cswithandroid.mastermind.myapplication;
  * Created by Mike on 2/10/16.
  */
 
+import android.widget.Button;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -50,6 +52,10 @@ public class MastermindDictionary {
 
         MastermindActivity.setAnswer(s);
         MastermindActivity.attempts = new ArrayList<String>();
+        MastermindActivity.tries = 0;
+        Button submit = MastermindActivity.getSubmitButton();
+        submit.setEnabled(true);
+
 
     }
 }

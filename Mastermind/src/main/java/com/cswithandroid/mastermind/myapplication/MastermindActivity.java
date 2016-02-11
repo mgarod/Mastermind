@@ -106,10 +106,12 @@ public class MastermindActivity extends AppCompatActivity {
     public static int currentDifficulty;
     public static int visibleWords = 10;
     public static String answer;
+    public static int tries;
 
     private Button easyButton;
     private Button medButton;
     private Button hardButton;
+    public static Button submitButton;
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
      * See https://g.co/AppIndexing/AndroidStudio for more information.
@@ -137,6 +139,8 @@ public class MastermindActivity extends AppCompatActivity {
         easyButton = (Button) findViewById(R.id.easyButton);
         medButton = (Button) findViewById(R.id.medButton);
         hardButton = (Button) findViewById(R.id.hardButton);
+
+        submitButton = (Button) findViewById(R.id.submitButton);
 
         /*
         // Set up the user interaction to manually show or hide the system UI.
@@ -244,9 +248,14 @@ public class MastermindActivity extends AppCompatActivity {
         if(hits == currentDifficulty) {
             Toast toast = Toast.makeText(this, "Congrats! You win", Toast.LENGTH_LONG);
             toast.show();
+            submitButton.setEnabled(false);
         }
-        else
+        else{
             attempts.add(userInput + ": " + Integer.toString(hits));
+            TextView score = (TextView) findViewById(R.id.scoreBoard);
+            score.setText(Integer.toString(++tries));
+
+        }
 
         input.clearComposingText();
     }
@@ -258,5 +267,9 @@ public class MastermindActivity extends AppCompatActivity {
                 hits++;
 
         return hits;
+    }
+
+    public static Button getSubmitButton(){
+        return submitButton;
     }
 }
