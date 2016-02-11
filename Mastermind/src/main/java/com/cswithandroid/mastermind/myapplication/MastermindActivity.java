@@ -90,7 +90,9 @@ public class MastermindActivity extends AppCompatActivity {
 
     /*** Mastermind Members ***/
     private MastermindDictionary dictionary;
-    static public int currentDifficulty;
+    public static int currentDifficulty;
+    public static int visibleWords;
+    public static String answer;
 
 
     @Override
@@ -177,5 +179,9 @@ public class MastermindActivity extends AppCompatActivity {
     private void delayedHide(int delayMillis) {
         mHideHandler.removeCallbacks(mHideRunnable);
         mHideHandler.postDelayed(mHideRunnable, delayMillis);
+    }
+
+    public static void setAnswer(String s){
+        answer = s;
     }
 }

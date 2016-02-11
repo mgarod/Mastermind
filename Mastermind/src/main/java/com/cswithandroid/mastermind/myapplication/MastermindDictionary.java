@@ -20,7 +20,6 @@ public class MastermindDictionary {
 
     private Random random = new Random();
     private static HashMap<Integer, ArrayList<String>> sizeToWords = new HashMap<>();
-    private final List<Integer> difficulties = Arrays.asList(4,6,8);
 
     public MastermindDictionary(InputStream wordListStream) throws IOException {
         BufferedReader in = new BufferedReader(new InputStreamReader(wordListStream));
@@ -28,7 +27,8 @@ public class MastermindDictionary {
         while((line = in.readLine()) != null) {
             String word = line.trim();
 
-            if(difficulties.contains( word.length()) ){
+            // Add words to HashMap according to word length
+            if(sizeToWords.containsKey( word.length()) ){
                 if(sizeToWords.containsKey( word.length()) ){
                     sizeToWords.get(word.length()).add(word);
                 }
@@ -43,17 +43,24 @@ public class MastermindDictionary {
 
     /*** Start New Game ***/
     public ArrayList<String> startNewGame(){
-        ArrayList<String> list = null;
+        ArrayList<String> masterList = sizeToWords.get(MastermindActivity.currentDifficulty);
+
+        int r = random.nextInt(masterList.size());
+        String s = masterList.get(r);
+        ArrayList<String> list = new ArrayList<>();
+        list.add(s);
+
+        for(int i = MastermindActivity.visibleWords; i > 0; i--){
+            do{
+                r = random.nextInt(masterList.size());
+            } while( list.contains(masterList.get(r)) );
+
+            list.add(masterList.get(r));
+        }
+
+        MastermindActivity.setAnswer(s);
+        list.add(random.nextInt(list.size()), s);
+
         return list;
     }
-
-    public String pickStarterWord() {
-        ArrayList<String> list = sizeToWords.get(MastermindActivity.currentDifficulty);
-
-        int r = random.nextInt(list.size());
-
-        return list.get(r);
-    }
-
-
 }
