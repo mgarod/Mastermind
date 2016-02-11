@@ -15,9 +15,9 @@
     <LinearLayout
         style="?metaButtonBarStyle"
         tools:ignore="UselessParent"
-        android:id="@+id/linearLayout"
+        android:id="@+id/buttonBar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="34dp"
         android:layout_gravity="bottom|center_horizontal"
         android:background="@color/black_overlay"
         android:orientation="horizontal" >
@@ -27,38 +27,42 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="Easy (4)"
-            android:id="@+id/button"
-            android:layout_weight="1" />
+            android:id="@+id/easyButton"
+            android:layout_weight="1"
+            android:onClick="setEasy" />
 
         <Button
             style="?android:attr/buttonStyleSmall"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="Medium (6)"
-            android:id="@+id/button2"
-            android:layout_weight="1" />
+            android:id="@+id/medButton"
+            android:layout_weight="1"
+            android:onClick="setMedium" />
 
         <Button
             style="?android:attr/buttonStyleSmall"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="Hard (8)"
-            android:id="@+id/button3"
-            android:layout_weight="1" />
+            android:id="@+id/hardButton"
+            android:layout_weight="1"
+            android:onClick="setHard" />
     </LinearLayout>
 
     <ListView
         android:layout_width="match_parent"
         android:layout_height="280dp"
-        android:id="@+id/listView"
+        android:id="@+id/visibleWords"
         android:layout_gravity="center"
         android:background="#a9a7a7"
-        android:fastScrollAlwaysVisible="false" />
+        android:fastScrollAlwaysVisible="false"
+        android:choiceMode="none" />
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="111dp"
-        android:id="@+id/editText"
+        android:id="@+id/userInput"
         android:layout_gravity="left|top"
         android:hint="@string/edit_text_prompt"
         android:background="#6fedcb"

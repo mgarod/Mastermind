@@ -2,13 +2,21 @@ package com.cswithandroid.mastermind.myapplication;
 
 import android.annotation.SuppressLint;
 import android.content.res.AssetManager;
+import android.graphics.Color;
+import android.net.Uri;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.android.gms.appindexing.Action;
+import com.google.android.gms.appindexing.AppIndex;
+import com.google.android.gms.common.api.GoogleApiClient;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -37,7 +45,7 @@ public class MastermindActivity extends AppCompatActivity {
     private static final int UI_ANIMATION_DELAY = 300;
     private final Handler mHideHandler = new Handler();
     private View mContentView;
-    private final Runnable mHidePart2Runnable = new Runnable() {
+    /*private final Runnable mHidePart2Runnable = new Runnable() {
         @SuppressLint("InlinedApi")
         @Override
         public void run() {
@@ -53,7 +61,7 @@ public class MastermindActivity extends AppCompatActivity {
                     | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
                     | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION);
         }
-    };
+    };*/
     private View mControlsView;
     private final Runnable mShowPart2Runnable = new Runnable() {
         @Override
@@ -88,12 +96,21 @@ public class MastermindActivity extends AppCompatActivity {
         }
     };
 
-    /*** Mastermind Members ***/
+    /***
+     * Mastermind Members
+     ***/
     private MastermindDictionary dictionary;
     public static int currentDifficulty;
-    public static int visibleWords;
+    public static int visibleWords = 10;
     public static String answer;
 
+    private Button easyButton;
+    private Button medButton;
+    private Button hardButton;
+    /**
+     * ATTENTION: This was auto-generated to implement the App Indexing API.
+     * See https://g.co/AppIndexing/AndroidStudio for more information.
+     */
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -114,18 +131,25 @@ public class MastermindActivity extends AppCompatActivity {
             toast.show();
         }
 
+        easyButton = (Button) findViewById(R.id.easyButton);
+        medButton = (Button) findViewById(R.id.medButton);
+        hardButton = (Button) findViewById(R.id.hardButton);
+
+        /*
         // Set up the user interaction to manually show or hide the system UI.
         mContentView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 toggle();
             }
-        });
+        });*/
 
         // Upon interacting with UI controls, delay any scheduled hide()
         // operations to prevent the jarring behavior of controls going away
         // while interacting with the UI.
         //findViewById(R.id.dummy_button).setOnTouchListener(mDelayHideTouchListener);
+        // ATTENTION: This was auto-generated to implement the App Indexing API.
+        // See https://g.co/AppIndexing/AndroidStudio for more information.
     }
 
     @Override
@@ -152,12 +176,12 @@ public class MastermindActivity extends AppCompatActivity {
         if (actionBar != null) {
             actionBar.hide();
         }
-        mControlsView.setVisibility(View.GONE);
+//        mControlsView.setVisibility(View.GONE);
         mVisible = false;
 
         // Schedule a runnable to remove the status and navigation bar after a delay
         mHideHandler.removeCallbacks(mShowPart2Runnable);
-        mHideHandler.postDelayed(mHidePart2Runnable, UI_ANIMATION_DELAY);
+        //mHideHandler.postDelayed(mHidePart2Runnable, UI_ANIMATION_DELAY);
     }
 
     @SuppressLint("InlinedApi")
@@ -168,7 +192,7 @@ public class MastermindActivity extends AppCompatActivity {
         mVisible = true;
 
         // Schedule a runnable to display UI elements after a delay
-        mHideHandler.removeCallbacks(mHidePart2Runnable);
+        //mHideHandler.removeCallbacks(mHidePart2Runnable);
         mHideHandler.postDelayed(mShowPart2Runnable, UI_ANIMATION_DELAY);
     }
 
@@ -181,7 +205,31 @@ public class MastermindActivity extends AppCompatActivity {
         mHideHandler.postDelayed(mHideRunnable, delayMillis);
     }
 
-    public static void setAnswer(String s){
+    public static void setAnswer(String s) {
         answer = s;
+    }
+
+    public void setEasy(View view) {
+        currentDifficulty = 4;
+        clearButtonColors();
+        easyButton.setBackgroundColor(Color.RED);
+    }
+
+    public void setMedium(View view) {
+        currentDifficulty = 6;
+        clearButtonColors();
+        medButton.setBackgroundColor(Color.RED);
+    }
+
+    public void setHard(View view) {
+        currentDifficulty = 8;
+        clearButtonColors();
+        hardButton.setBackgroundColor(Color.RED);
+    }
+
+    public void clearButtonColors() {
+        easyButton.setBackgroundColor(Color.WHITE);
+        medButton.setBackgroundColor(Color.WHITE);
+        hardButton.setBackgroundColor(Color.WHITE);
     }
 }
