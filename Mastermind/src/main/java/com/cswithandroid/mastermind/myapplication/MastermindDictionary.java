@@ -49,6 +49,7 @@ public class MastermindDictionary {
         String s = masterList.get(r);
 
         MastermindActivity.setAnswer(s);
+        MastermindActivity.attempts = new ArrayList<String>();
 
     }
 }

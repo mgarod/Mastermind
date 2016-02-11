@@ -11,6 +11,7 @@ import android.os.Handler;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,6 +21,7 @@ import com.google.android.gms.common.api.GoogleApiClient;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 
 /**
  * An example full-screen activity that shows and hides the system UI (i.e.
@@ -100,9 +102,10 @@ public class MastermindActivity extends AppCompatActivity {
      * Mastermind Members
      ***/
     private MastermindDictionary dictionary;
+    public static ArrayList<String> attempts;
     public static int currentDifficulty;
+    public static int visibleWords = 10;
     public static String answer;
-    public int numTries;
 
     private Button easyButton;
     private Button medButton;
@@ -231,5 +234,29 @@ public class MastermindActivity extends AppCompatActivity {
         easyButton.setBackgroundColor(Color.WHITE);
         medButton.setBackgroundColor(Color.WHITE);
         hardButton.setBackgroundColor(Color.WHITE);
+    }
+
+    public void submitButton(){
+        EditText input = (EditText) findViewById(R.id.userInput);
+        String userInput = input.toString();
+        int hits = numRight(userInput);
+
+        if(hits == currentDifficulty) {
+            Toast toast = Toast.makeText(this, "Congrats! You win", Toast.LENGTH_LONG);
+            toast.show();
+        }
+        else
+            attempts.add(userInput + ": " + Integer.toString(hits));
+
+        input.clearComposingText();
+    }
+
+    public int numRight(String input){
+        int hits = 0;
+        for(int i = 0; i < currentDifficulty; i++)
+            if(answer.charAt(i) == input.charAt(i))
+                hits++;
+
+        return hits;
     }
 }
