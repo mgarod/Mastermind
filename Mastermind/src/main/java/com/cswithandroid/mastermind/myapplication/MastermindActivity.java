@@ -220,18 +220,21 @@ public class MastermindActivity extends AppCompatActivity {
     }
 
     public void setEasy(View view) {
+        reset();
         currentDifficulty = 4;
         clearButtonColors();
         easyButton.setBackgroundColor(Color.RED);
     }
 
     public void setMedium(View view) {
+        reset();
         currentDifficulty = 6;
         clearButtonColors();
         medButton.setBackgroundColor(Color.RED);
     }
 
     public void setHard(View view) {
+        reset();
         currentDifficulty = 8;
         clearButtonColors();
         hardButton.setBackgroundColor(Color.RED);
@@ -288,6 +291,18 @@ public class MastermindActivity extends AppCompatActivity {
                 hits++;
 
         return hits;
+    }
+
+    public void reset(){
+        EditText input = (EditText) findViewById(R.id.userInput);
+        input.setText("");
+
+        TextView score = (TextView) findViewById(R.id.scoreBoard);
+        score.setText("0");
+
+        TextView wordsView = (TextView) findViewById(R.id.visibleWords);
+        wordsView.setText("");
+        
     }
 
     public static Button getSubmitButton(){
