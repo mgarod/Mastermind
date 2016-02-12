@@ -259,7 +259,7 @@ public class MastermindActivity extends AppCompatActivity {
 
             int hits = numRight(userInput);
 
-            System.out.println("\n\ninside submitword\n\n");
+            //System.out.println("\n\ninside submitword\n\n");
 
             if (hits == currentDifficulty) {
                 toast = Toast.makeText(this, "Congrats! You win", Toast.LENGTH_LONG);
@@ -272,7 +272,7 @@ public class MastermindActivity extends AppCompatActivity {
                 score.setText(Integer.toString(++tries));
                 
                 TextView wordsView = (TextView) findViewById(R.id.visibleWords);
-                s = s+"/n"+wordsView.getText().toString();
+                s = s+"\n"+wordsView.getText().toString();
                 wordsView.setText(s);
 
             }

@@ -7,10 +7,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2b9bb841-ea7c-412e-a58c-769d876bdd02" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Mastermind/Mastermind-Mastermind.iml" afterPath="$PROJECT_DIR$/Mastermind/Mastermind-Mastermind.iml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Mastermind/src/main/java/com/cswithandroid/mastermind/myapplication/MastermindActivity.java" afterPath="$PROJECT_DIR$/Mastermind/src/main/java/com/cswithandroid/mastermind/myapplication/MastermindActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/local.properties" afterPath="$PROJECT_DIR$/local.properties" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="Mastermind.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -34,8 +31,8 @@
       <file leaf-file-name="MastermindActivity.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Mastermind/src/main/java/com/cswithandroid/mastermind/myapplication/MastermindActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.38593483">
-              <caret line="254" column="25" selection-start-line="254" selection-start-column="25" selection-end-line="254" selection-end-column="25" />
+            <state vertical-scroll-proportion="0.5660377">
+              <caret line="275" column="37" selection-start-line="275" selection-start-column="37" selection-end-line="275" selection-end-column="37" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#7683#7684#0" expanded="true" />
@@ -2001,8 +1998,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Mastermind/src/main/java/com/cswithandroid/mastermind/myapplication/MastermindActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.38593483">
-          <caret line="254" column="25" selection-start-line="254" selection-start-column="25" selection-end-line="254" selection-end-column="25" />
+        <state vertical-scroll-proportion="0.5660377">
+          <caret line="275" column="37" selection-start-line="275" selection-start-column="37" selection-end-line="275" selection-end-column="37" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#7683#7684#0" expanded="true" />
