@@ -244,10 +244,17 @@ public class MastermindActivity extends AppCompatActivity {
     }
 
     public void submitWord(View view){
-        System.out.println("The answer: "+answer);
+        //System.out.println("The answer: "+answer);
         EditText input = (EditText) findViewById(R.id.userInput);
         String userInput = input.getText().toString();
-        System.out.println("\n\nuserinput: "+userInput+"\n\n");
+        //System.out.println("\n\nuserinput: "+userInput+"\n\n");
+        Toast toast;
+
+        if(userInput.length() != currentDifficulty){
+            toast = Toast.makeText(this, "Word must be " + Integer.toString(currentDifficulty) + " letters long!", Toast.LENGTH_LONG);
+            toast.show();
+        }
+
         if(userInput.length() == currentDifficulty) {
 
             int hits = numRight(userInput);
@@ -255,7 +262,7 @@ public class MastermindActivity extends AppCompatActivity {
             System.out.println("\n\ninside submitword\n\n");
 
             if (hits == currentDifficulty) {
-                Toast toast = Toast.makeText(this, "Congrats! You win", Toast.LENGTH_LONG);
+                toast = Toast.makeText(this, "Congrats! You win", Toast.LENGTH_LONG);
                 toast.show();
                 submitButton.setEnabled(false);
             } else {
