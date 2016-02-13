@@ -254,8 +254,12 @@ public class MastermindActivity extends AppCompatActivity {
         int hits = numRight(userInput);
         WordScorePair wsp = new WordScorePair(hits, userInput);
 
-        if( userInput.length() != currentDifficulty ){
+        if(userInput.length() != currentDifficulty){
             toast = Toast.makeText(this, "Word must be " + Integer.toString(currentDifficulty) + " letters long!", Toast.LENGTH_LONG);
+            toast.show();
+        }
+        else if(!dictionary.contains(userInput)){
+            toast = Toast.makeText(this, "Invalid Word!", Toast.LENGTH_LONG);
             toast.show();
         }
         else{ // if(userInput.length() != currentDifficulty)

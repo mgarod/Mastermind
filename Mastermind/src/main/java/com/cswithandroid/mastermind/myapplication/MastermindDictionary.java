@@ -4,6 +4,7 @@ package com.cswithandroid.mastermind.myapplication;
  * Created by Mike on 2/10/16.
  */
 
+import android.media.tv.TvInputService;
 import android.widget.Button;
 
 import java.io.BufferedReader;
@@ -39,6 +40,10 @@ public class MastermindDictionary {
                 sizeToWords.put(word.length(),list);
             }
         }
+    }
+
+    public Boolean contains(String word){
+        return sizeToWords.get(MastermindActivity.currentDifficulty).contains(word);
     }
 
     /*** Start New Game ***/
