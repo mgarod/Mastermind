@@ -3,6 +3,7 @@ package com.cswithandroid.mastermind.myapplication;
 import android.annotation.SuppressLint;
 import android.content.res.AssetManager;
 import android.graphics.Color;
+import android.provider.UserDictionary;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -18,6 +19,8 @@ import android.widget.Toast;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.PriorityQueue;
 
 /**
  * An example full-screen activity that shows and hides the system UI (i.e.
@@ -97,10 +100,11 @@ public class MastermindActivity extends AppCompatActivity {
     /***
      * Mastermind Members
      ***/
-    private MastermindDictionary dictionary;
     public static int currentDifficulty = 4;
     public static String answer;
     public static int tries;
+    private MastermindDictionary dictionary;
+    private PriorityQueue<WordScorePair> priorityQueue;
 
     private Button easyButton;
     private Button medButton;
@@ -118,7 +122,8 @@ public class MastermindActivity extends AppCompatActivity {
         setContentView(R.layout.activity_mastermind);
 
         mVisible = true;
-        //mControlsView = findViewById(R.id.fullscreen_content_controls);
+        //mControlsView = findViewById(R.id.fullscreen_content_control
+        // s);
         //mContentView = findViewById(R.id.fullscreen_content);
 
         easyButton = (Button) findViewById(R.id.easyButton);
@@ -127,6 +132,8 @@ public class MastermindActivity extends AppCompatActivity {
         submitButton = (Button) findViewById(R.id.submitButton);
         submitButton.setEnabled(false);
         setEasy(this.mContentView);
+
+        priorityQueue = new PriorityQueue<>();
 
         AssetManager assetManager = getAssets();
         try {
@@ -244,15 +251,15 @@ public class MastermindActivity extends AppCompatActivity {
         EditText input = (EditText) findViewById(R.id.userInput);
         String userInput = input.getText().toString();
         Toast toast;
+        int hits = numRight(userInput);
+        WordScorePair wsp = new WordScorePair(hits, userInput);
 
-        if(userInput.length() != currentDifficulty){
+        if( userInput.length() != currentDifficulty ){
             toast = Toast.makeText(this, "Word must be " + Integer.toString(currentDifficulty) + " letters long!", Toast.LENGTH_LONG);
             toast.show();
         }
-
-        if(userInput.length() == currentDifficulty) {
-
-            int hits = numRight(userInput);
+        else{ // if(userInput.length() != currentDifficulty)
+            priorityQueue.add(wsp);
 
             if (hits == currentDifficulty) {
                 toast = Toast.makeText(this, "Congrats! You win", Toast.LENGTH_LONG);
@@ -263,10 +270,23 @@ public class MastermindActivity extends AppCompatActivity {
                 score.setText(Integer.toString(++tries));
             }
 
-            String s = userInput + ": " + Integer.toString(hits) + " / " + Integer.toString(currentDifficulty);
+            // Add word to text view
             TextView wordsView = (TextView) findViewById(R.id.visibleWords);
-            s = s+"\n"+wordsView.getText().toString();
-            wordsView.setText(s);
+            wordsView.setText("");
+
+            PriorityQueue<WordScorePair> tempPQ = new PriorityQueue<>();
+            Iterator<WordScorePair> it = priorityQueue.iterator();
+            while (it.hasNext()){
+                WordScorePair w = it.next();
+                tempPQ.add(new WordScorePair(w));
+            }
+
+            while (tempPQ.size() > 0){
+                WordScorePair tempWSP = tempPQ.poll();
+                String s = tempWSP.word + ": " + Integer.toString(tempWSP.numHits) + " / " + Integer.toString(currentDifficulty);
+                s = s+"\n"+wordsView.getText().toString();
+                wordsView.setText(s);
+            }
         }
 
         input.setText("");
@@ -291,6 +311,7 @@ public class MastermindActivity extends AppCompatActivity {
         TextView wordsView = (TextView) findViewById(R.id.visibleWords);
         wordsView.setText("");
 
+        priorityQueue = new PriorityQueue<>();
     }
 
     public static Button getSubmitButton(){

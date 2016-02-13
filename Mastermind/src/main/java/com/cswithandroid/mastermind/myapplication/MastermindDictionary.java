@@ -39,8 +39,6 @@ public class MastermindDictionary {
                 sizeToWords.put(word.length(),list);
             }
         }
-
-        System.out.println(sizeToWords.get(8));
     }
 
     /*** Start New Game ***/
