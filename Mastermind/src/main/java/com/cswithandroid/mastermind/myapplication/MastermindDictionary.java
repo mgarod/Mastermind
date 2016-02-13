@@ -48,17 +48,12 @@ public class MastermindDictionary {
         ArrayList<String> masterList = sizeToWords.get(MastermindActivity.currentDifficulty);
 
         int r = random.nextInt(masterList.size());
-        System.out.println("\n\nML Size: "+masterList.size()+"\n\n");
-        System.out.println("\n\nR: "+r+"\n\n");
         String s = masterList.get(r);
         System.out.println("\n\nS: "+s+"\n\n");
 
         MastermindActivity.setAnswer(s);
-        MastermindActivity.attempts = new ArrayList<String>();
         MastermindActivity.tries = 0;
         Button submit = MastermindActivity.getSubmitButton();
         submit.setEnabled(true);
-
-
     }
 }

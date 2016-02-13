@@ -3,7 +3,6 @@ package com.cswithandroid.mastermind.myapplication;
 import android.annotation.SuppressLint;
 import android.content.res.AssetManager;
 import android.graphics.Color;
-import android.net.Uri;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -15,10 +14,6 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.google.android.gms.appindexing.Action;
-import com.google.android.gms.appindexing.AppIndex;
-import com.google.android.gms.common.api.GoogleApiClient;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -103,9 +98,7 @@ public class MastermindActivity extends AppCompatActivity {
      * Mastermind Members
      ***/
     private MastermindDictionary dictionary;
-    public static ArrayList<String> attempts;
     public static int currentDifficulty = 4;
-    public static int visibleWords = 10;
     public static String answer;
     public static int tries;
 
@@ -132,6 +125,7 @@ public class MastermindActivity extends AppCompatActivity {
         medButton = (Button) findViewById(R.id.medButton);
         hardButton = (Button) findViewById(R.id.hardButton);
         submitButton = (Button) findViewById(R.id.submitButton);
+        submitButton.setEnabled(false);
         setEasy(this.mContentView);
 
         AssetManager assetManager = getAssets();
@@ -241,16 +235,14 @@ public class MastermindActivity extends AppCompatActivity {
     }
 
     public void clearButtonColors() {
-        easyButton.setBackgroundColor(Color.WHITE);
-        medButton.setBackgroundColor(Color.WHITE);
-        hardButton.setBackgroundColor(Color.WHITE);
+        easyButton.setBackgroundColor(Color.GRAY);
+        medButton.setBackgroundColor(Color.GRAY);
+        hardButton.setBackgroundColor(Color.GRAY);
     }
 
     public void submitWord(View view){
-        //System.out.println("The answer: "+answer);
         EditText input = (EditText) findViewById(R.id.userInput);
         String userInput = input.getText().toString();
-        //System.out.println("\n\nuserinput: "+userInput+"\n\n");
         Toast toast;
 
         if(userInput.length() != currentDifficulty){
@@ -262,23 +254,19 @@ public class MastermindActivity extends AppCompatActivity {
 
             int hits = numRight(userInput);
 
-            //System.out.println("\n\ninside submitword\n\n");
-
             if (hits == currentDifficulty) {
                 toast = Toast.makeText(this, "Congrats! You win", Toast.LENGTH_LONG);
                 toast.show();
                 submitButton.setEnabled(false);
             } else {
-                //attempts.add(userInput + ": " + Integer.toString(hits) + " / " + Integer.toString(currentDifficulty));
-                String s = userInput + ": " + Integer.toString(hits) + " / " + Integer.toString(currentDifficulty);
                 TextView score = (TextView) findViewById(R.id.scoreBoard);
                 score.setText(Integer.toString(++tries));
-                
-                TextView wordsView = (TextView) findViewById(R.id.visibleWords);
-                s = s+"\n"+wordsView.getText().toString();
-                wordsView.setText(s);
-
             }
+
+            String s = userInput + ": " + Integer.toString(hits) + " / " + Integer.toString(currentDifficulty);
+            TextView wordsView = (TextView) findViewById(R.id.visibleWords);
+            s = s+"\n"+wordsView.getText().toString();
+            wordsView.setText(s);
         }
 
         input.setText("");
@@ -302,7 +290,7 @@ public class MastermindActivity extends AppCompatActivity {
 
         TextView wordsView = (TextView) findViewById(R.id.visibleWords);
         wordsView.setText("");
-        
+
     }
 
     public static Button getSubmitButton(){
@@ -311,5 +299,6 @@ public class MastermindActivity extends AppCompatActivity {
 
     public void startNewGame(View view){
         dictionary.startNewGame();
+        reset();
     }
 }
