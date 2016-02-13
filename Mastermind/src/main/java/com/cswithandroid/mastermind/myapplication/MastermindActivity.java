@@ -132,7 +132,6 @@ public class MastermindActivity extends AppCompatActivity {
         hardButton = (Button) findViewById(R.id.hardButton);
         submitButton = (Button) findViewById(R.id.submitButton);
         submitButton.setEnabled(false);
-        setEasy(this.mContentView);
 
         TextView tv = (TextView) findViewById(R.id.visibleWords);
         tv.setMovementMethod(new ScrollingMovementMethod());
@@ -148,6 +147,7 @@ public class MastermindActivity extends AppCompatActivity {
             toast.show();
         }
 
+        setEasy(this.mContentView);
         startNewGame(this.mContentView);
 
         /*
@@ -225,24 +225,24 @@ public class MastermindActivity extends AppCompatActivity {
     }
 
     public void setEasy(View view) {
-        reset();
         currentDifficulty = 4;
+        startNewGame(view);
         clearButtonColors();
         easyButton.setTextColor(Color.RED);
         //easyButton.setBackgroundColor(Color.RED);
     }
 
     public void setMedium(View view) {
-        reset();
         currentDifficulty = 6;
+        startNewGame(view);
         clearButtonColors();
         medButton.setTextColor(Color.RED);
         //medButton.setBackgroundColor(Color.RED);
     }
 
     public void setHard(View view) {
-        reset();
         currentDifficulty = 8;
+        startNewGame(view);
         clearButtonColors();
         hardButton.setTextColor(Color.RED);
         //hardButton.setBackgroundColor(Color.RED);
@@ -324,7 +324,9 @@ public class MastermindActivity extends AppCompatActivity {
         score.setText(" Attempts:\n\t\t\t\t0");
 
         TextView wordsView = (TextView) findViewById(R.id.visibleWords);
-        wordsView.setText("");
+        String s = "I'm thinking of a " + Integer.toString(MastermindActivity.currentDifficulty) + " letter word...\n\n";
+        s = s + "When you guess, I'll tell you how many letters are in the correct place.";
+        wordsView.setText(s);
 
         priorityQueue = new PriorityQueue<>();
     }
@@ -336,9 +338,5 @@ public class MastermindActivity extends AppCompatActivity {
     public void startNewGame(View view){
         dictionary.startNewGame();
         reset();
-        TextView wordsView = (TextView) findViewById(R.id.visibleWords);
-        String s = "I'm thinking of a " + Integer.toString(MastermindActivity.currentDifficulty) + " letter word...\n\n";
-        s = s + "When you guess, I'll tell you how many letters are in the correct place.";
-        wordsView.setText(s);
     }
 }
