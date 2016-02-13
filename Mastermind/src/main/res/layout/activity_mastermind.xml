@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#5ea8c0"
+    android:background="#CFD8DC"
     tools:context="com.cswithandroid.mastermind.myapplication.MastermindActivity">
 
     <!-- The primary full-screen view. This can be replaced with whatever view
@@ -19,7 +19,7 @@
         android:layout_width="match_parent"
         android:layout_height="114dp"
         android:layout_gravity="bottom|center_horizontal"
-        android:background="@color/black_overlay"
+        android:background="#455A64"
         android:orientation="vertical" >
 
         <LinearLayout
@@ -36,7 +36,8 @@
                 android:text="Easy (4)"
                 android:id="@+id/easyButton"
                 android:layout_weight="1"
-                android:onClick="setEasy" />
+                android:onClick="setEasy"
+                android:elevation="16dp" />
 
             <Button
                 style="?android:attr/buttonStyleSmall"
@@ -45,7 +46,8 @@
                 android:text="Medium (6)"
                 android:id="@+id/medButton"
                 android:layout_weight="1"
-                android:onClick="setMedium" />
+                android:onClick="setMedium"
+                android:elevation="16dp" />
 
             <Button
                 style="?android:attr/buttonStyleSmall"
@@ -54,7 +56,8 @@
                 android:text="Hard (8)"
                 android:id="@+id/hardButton"
                 android:layout_weight="1"
-                android:onClick="setHard" />
+                android:onClick="setHard"
+                android:elevation="16dp" />
         </LinearLayout>
 
         <LinearLayout
@@ -68,7 +71,8 @@
                 android:text="Start New Game"
                 android:id="@+id/newGameButton"
                 android:layout_weight="1"
-                android:onClick="startNewGame" />
+                android:onClick="startNewGame"
+                android:elevation="16dp" />
         </LinearLayout>
 
     </LinearLayout>
@@ -77,7 +81,8 @@
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="117dp"
-        android:id="@+id/userDashboard">
+        android:id="@+id/userDashboard"
+        android:background="#455A64">
 
         <EditText
             android:layout_width="279dp"
@@ -85,8 +90,10 @@
             android:id="@+id/userInput"
             android:layout_gravity="left|top"
             android:hint="@string/edit_text_prompt"
-            android:background="#6fedcb"
-            android:inputType="text" />
+            android:background="#FFFFFF"
+            android:inputType="text"
+            android:shadowColor="#9E9E9E"
+            android:elevation="16dp" />
 
         <LinearLayout
             android:orientation="vertical"
@@ -100,8 +107,11 @@
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:id="@+id/scoreBoard"
                 android:layout_weight="1"
-                android:text="ScoreBoard"
-                android:password="false" />
+                android:password="false"
+                android:background="#B6B6B6"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:elevation="16dp" />
 
             <Button
                 android:layout_width="match_parent"
@@ -110,15 +120,18 @@
                 android:id="@+id/submitButton"
                 android:layout_gravity="right|top"
                 android:layout_weight="1"
-                android:onClick="submitWord" />
+                android:onClick="submitWord"
+                android:elevation="16dp" />
         </LinearLayout>
     </LinearLayout>
-
     <TextView
         android:layout_width="321dp"
         android:layout_height="263dp"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:id="@+id/visibleWords"
-        android:layout_gravity="center" />
+        android:layout_gravity="center"
+        android:scrollbars="vertical" />
+
+
 
 </FrameLayout>

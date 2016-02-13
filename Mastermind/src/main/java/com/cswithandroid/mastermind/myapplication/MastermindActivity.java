@@ -8,6 +8,7 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.os.Handler;
+import android.text.method.ScrollingMovementMethod;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
@@ -133,6 +134,9 @@ public class MastermindActivity extends AppCompatActivity {
         submitButton.setEnabled(false);
         setEasy(this.mContentView);
 
+        TextView tv = (TextView) findViewById(R.id.visibleWords);
+        tv.setMovementMethod(new ScrollingMovementMethod());
+
         priorityQueue = new PriorityQueue<>();
 
         AssetManager assetManager = getAssets();
@@ -224,35 +228,39 @@ public class MastermindActivity extends AppCompatActivity {
         reset();
         currentDifficulty = 4;
         clearButtonColors();
-        easyButton.setBackgroundColor(Color.RED);
+        easyButton.setTextColor(Color.RED);
+        //easyButton.setBackgroundColor(Color.RED);
     }
 
     public void setMedium(View view) {
         reset();
         currentDifficulty = 6;
         clearButtonColors();
-        medButton.setBackgroundColor(Color.RED);
+        medButton.setTextColor(Color.RED);
+        //medButton.setBackgroundColor(Color.RED);
     }
 
     public void setHard(View view) {
         reset();
         currentDifficulty = 8;
         clearButtonColors();
-        hardButton.setBackgroundColor(Color.RED);
+        hardButton.setTextColor(Color.RED);
+        //hardButton.setBackgroundColor(Color.RED);
     }
 
     public void clearButtonColors() {
-        easyButton.setBackgroundColor(Color.GRAY);
-        medButton.setBackgroundColor(Color.GRAY);
-        hardButton.setBackgroundColor(Color.GRAY);
+        easyButton.setTextColor(Color.BLACK);
+        medButton.setTextColor(Color.BLACK);
+        hardButton.setTextColor(Color.BLACK);
+        //easyButton.setBackgroundColor(Color.GRAY);
+        //medButton.setBackgroundColor(Color.GRAY);
+        //hardButton.setBackgroundColor(Color.GRAY);
     }
 
     public void submitWord(View view){
         EditText input = (EditText) findViewById(R.id.userInput);
         String userInput = input.getText().toString();
         Toast toast;
-        int hits = numRight(userInput);
-        WordScorePair wsp = new WordScorePair(hits, userInput);
 
         if(userInput.length() != currentDifficulty){
             toast = Toast.makeText(this, "Word must be " + Integer.toString(currentDifficulty) + " letters long!", Toast.LENGTH_LONG);
@@ -263,6 +271,8 @@ public class MastermindActivity extends AppCompatActivity {
             toast.show();
         }
         else{ // if(userInput.length() != currentDifficulty)
+            int hits = numRight(userInput);
+            WordScorePair wsp = new WordScorePair(hits, userInput);
             priorityQueue.add(wsp);
 
             if (hits == currentDifficulty) {
@@ -271,7 +281,8 @@ public class MastermindActivity extends AppCompatActivity {
                 submitButton.setEnabled(false);
             } else {
                 TextView score = (TextView) findViewById(R.id.scoreBoard);
-                score.setText(Integer.toString(++tries));
+                String s = " Attempts:\n\t\t\t\t" + Integer.toString(++tries);
+                score.setText(s);
             }
 
             // Add word to text view
@@ -310,7 +321,7 @@ public class MastermindActivity extends AppCompatActivity {
         input.setText("");
 
         TextView score = (TextView) findViewById(R.id.scoreBoard);
-        score.setText("0");
+        score.setText(" Attempts:\n\t\t\t\t0");
 
         TextView wordsView = (TextView) findViewById(R.id.visibleWords);
         wordsView.setText("");
@@ -325,5 +336,9 @@ public class MastermindActivity extends AppCompatActivity {
     public void startNewGame(View view){
         dictionary.startNewGame();
         reset();
+        TextView wordsView = (TextView) findViewById(R.id.visibleWords);
+        String s = "I'm thinking of a " + Integer.toString(MastermindActivity.currentDifficulty) + " letter word...\n\n";
+        s = s + "When you guess, I'll tell you how many letters are in the correct place.";
+        wordsView.setText(s);
     }
 }
