@@ -11,6 +11,8 @@ gradlew
 gradlew.bat
 settings.gradle
 build.gradle
+proguard-rules.pro
+Mastermind-Mastermind.iml
 
 # Compiled source #
 ###################
